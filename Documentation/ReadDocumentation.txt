@@ -1,2 +1,0 @@
-Documentation for projects and assignments will be shown here and also shown in WIKI.
-(Prefer Wiki for Checking Documentation)
