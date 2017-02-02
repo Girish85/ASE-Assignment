@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Loginpage</title>
+</head>
+<body background="background-24.jpg" >
+<form>
+    <fieldset>
+<legend>Personal Information:</legend>
+        <pre>
+    <h1>        NAME:         <input type="text" name="Firstname" maxlength="25" placeholder="Firstname" required autocomplete="on">  <input type="text" name="lastname" maxlength="15" placeholder="lastname" autocomplete="on"><br>
+        Contact:      <input type="text" placeholder="Mobilenumber" required autocomplete="on"><br>
+        Gender:       <input type="radio" name="gender" value="male">Male<input type="radio" name="gender" value="female">Female<br>
+        Mailid:       <input type="email" name="email" autocomplete="on" placeholder="emailid" required><br>
+        Date of Birth:<input type="date" placeholder="Date of Birth" required autocomplete="off" name="dateofbirth"><br>
+        Address:
+                      <textarea name="address" required rows="8" cols="16" placeholder="Enter your address"></textarea><br>
+        Account type: <select>
+            <option value="free account">free account</option>
+            <option value="paid account"selected>Paid account</option>
+        </select><br>
+        Hobbies:      <input list="hobbies" placeholder="Enter one">
+        <datalist id="hobbies">
+        <option>playing cricket</option>
+        <option>watching TV</option>
+        <option>Reading books</option>
+        <option>browsing</option>
+        <option>sleeping</option>
+        </datalist><br>
+        <input type="button" onclick="alert('cant help you now sorry')" value="help" name="help">  <input type="submit" name="submit" value="submit" onclick="alert('submitted successfully')">
+        </h1></pre>
+    </fieldset>
+</form>
+</body>
+</html>

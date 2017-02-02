@@ -1,0 +1,15 @@
+body{background-color: lightyellow;}
+h1{font-family: Arial;text-align:center}
+#585{color:rgb(0,0,0)}
+pre{font-size: 20px;color:indianred}
+p.blue{color: cadetblue}
+img{float:right;width:30%;height: 25%}
+table,th,td{border: 1px solid black;border-collapse: collapse;text-align: left;padding:2px;border-spacing:1px}
+th{color: red}
+td{color: skyblue}
+ul{list-style-type: square}
+li{color: cornflowerblue}
+ol{list-style-type:lower-alpha}
+div.d1{background-color: ghostwhite}
+iframe{width:100%;height:60%;text-align:center}
+h2{font-family: Arial;text-align:center}

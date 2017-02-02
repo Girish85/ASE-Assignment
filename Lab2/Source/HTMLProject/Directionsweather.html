@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Place Autocomplete</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link href="dirstyle.css" rel="stylesheet">
+</head>
+<input id="origin-input" class="controls" type="text"
+       placeholder="Enter origin location">
+
+<input id="destination-input" class="controls" type="text"
+       placeholder="Enter destination location">
+
+<div id="mode-selector" class="controls">
+    <input type="radio" name="type" id="changemode-walking" >
+    <label for="changemode-walking">Walking</label>
+
+    <input type="radio" name="type" id="changemode-transit" checked="checked">
+    <label for="changemode-transit">Transit</label>
+
+    <input type="radio" name="type" id="changemode-driving">
+    <label for="changemode-driving">Driving</label>
+</div>
+<<div id="map" style="width: 100%;height: 600px"></div>
+    <div>
+          <div id="weather">
+              <pre>                                        <button type="button" onclick="weather()">ShowWeather</button></pre>
+</div><div id="weather2" style="text-align:center"></div>
+<pre><img id="icon" src="/">                                                                                        <img id="icon2" src="/"></pre>
+    <pre><span id="Temperature">Temperature:</span>                                                                                             <span id="Temperature2" style="text-align:center">Temperature:</span></pre>
+</div>
+<script>
+       function initMap() {
+
+               var loc={
+                   center:{lat:51.2,lng:-0.12},
+                   zoom:10,
+                   mapTypeId:google.maps.MapTypeId.ROAD
+               };
+               var canvas=document.getElementById("map");
+               var map=new google.maps.Map(canvas,loc);
+
+
+        new AutocompleteDirectionsHandler(map);
+    }
+
+      function AutocompleteDirectionsHandler(map) {
+        this.map = map;
+        this.originPlaceId = null;
+        this.destinationPlaceId = null;
+        this.travelMode = 'TRANSIT';
+        var originInput = document.getElementById('origin-input');
+        var destinationInput = document.getElementById('destination-input');
+        var modeSelector = document.getElementById('mode-selector');
+        this.directionsService = new google.maps.DirectionsService;
+        this.directionsDisplay = new google.maps.DirectionsRenderer;
+        this.directionsDisplay.setMap(map);
+
+        var originAutocomplete = new google.maps.places.Autocomplete(
+            originInput, {placeIdOnly: true});
+        var destinationAutocomplete = new google.maps.places.Autocomplete(
+            destinationInput, {placeIdOnly: true});
+
+        this.setupClickListener('changemode-walking', 'WALKING');
+        this.setupClickListener('changemode-transit', 'TRANSIT');
+        this.setupClickListener('changemode-driving', 'DRIVING');
+
+        this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
+        this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
+
+        this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(originInput);
+        this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(destinationInput);
+        this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(modeSelector);
+    }
+
+        AutocompleteDirectionsHandler.prototype.setupClickListener = function(id, mode) {
+        var radioButton = document.getElementById(id);
+        var me = this;
+        radioButton.addEventListener('click', function() {
+            me.travelMode = mode;
+            me.route();
+        });
+    };
+
+    AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(autocomplete, mode) {
+        var me = this;
+        autocomplete.bindTo('bounds', this.map);
+        autocomplete.addListener('place_changed', function() {
+            var place = autocomplete.getPlace();
+            if (!place.place_id) {
+                window.alert("select an option from the dropdown list.");
+                return;
+            }
+            if (mode === 'ORIG') {
+                me.originPlaceId = place.place_id;
+            } else {
+                me.destinationPlaceId = place.place_id;
+            }
+            me.route();
+        });
+
+    };
+       AutocompleteDirectionsHandler.prototype.route = function() {
+        if (!this.originPlaceId || !this.destinationPlaceId) {
+            return;
+        }
+        var me = this;
+
+        this.directionsService.route({
+            origin: {'placeId': this.originPlaceId},
+            destination: {'placeId': this.destinationPlaceId},
+            travelMode: this.travelMode
+        }, function(response, status) {
+            if (status === 'OK') {
+                me.directionsDisplay.setDirections(response);
+            } else {
+                window.alert('Directions request failed due to ' + status);
+            }
+        });
+    };
+       function weather() {
+           var weather = new XMLHttpRequest();
+           weather.open("GET", "http://api.wunderground.com/api/2087423afd9b0258/geolookup/conditions/q/mo/kansas%20city.json", false);
+           weather.send(null);
+           var r = JSON.parse(weather.response);
+           var weather = "origin location:"+ "<br/>";
+           var Temperature = r.current_observation.temperature_string + "<br/>";
+           var Icon=r.current_observation.icon_url;
+           document.getElementById("weather").innerHTML = weather;
+           document.getElementById("Temperature").innerHTML = Temperature;
+           document.getElementById("icon").src=Icon;
+           var weather2 = new XMLHttpRequest();
+           weather2.open("GET", "http://api.wunderground.com/api/2087423afd9b0258/geolookup/conditions/q/il/chicago.json", false);
+           weather2.send(null);
+           var r2 = JSON.parse(weather2.response);
+           var weather2 = "Destination location:" +"<br/>";
+           var Temperature2 = r2.current_observation.temperature_string + "<br/>";
+           var Icon2=r2.current_observation.icon_url;
+           document.getElementById("weather2").innerHTML = weather2;
+           document.getElementById("Temperature2").innerHTML = Temperature2;
+           document.getElementById("icon2").src=Icon2;
+
+       }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCM5iKqeveah1FIRA3UgzdIKNEZiPcq_Cs&libraries=places&callback=initMap"
+        async defer></script>
+</body>
+</html>
