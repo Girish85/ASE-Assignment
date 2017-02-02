@@ -1,2 +1,3 @@
 # ASE-Assignment
-This is my first Assignment, I must submit it by Wednesday.
+This is the link for wiki page
+https://github.com/Girish85/ASE-Assignment/wiki/LAB-ASSIGNMENT-2
