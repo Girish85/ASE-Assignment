@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Mypage</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="app.css">
+
+    <style>
+
+        .menu input{
+            width: 300px;
+            background: transparent;
+            border: 2px solid #1ab188;
+            border-radius: 4px;
+            color: black;
+            font-family: 'Exo', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 6px;
+            margin-top: 10px;
+        }
+        .menu button{
+            width: 419px;
+            height:40px;
+            background:#1ab188;
+            border:  2px solid #ffffff;
+            cursor: pointer;
+            border-radius: 4px;
+            color:blanchedalmond;
+            font-family: 'Exo', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 6px;
+            margin-top: 10px;
+        }
+        table {
+            max-width: 960px;
+            margin: 10px auto;
+            border: 1px solid #FFF;
+        }
+
+        caption {
+            font-size: 1.6em;
+            font-weight: 400;
+            padding: 10px 0;
+        }
+
+        thead th {
+            font-weight: 400;
+            background: #8a97a0;
+            color: #FFF;
+        }
+
+        tr {
+            background: #f4f7f8;
+            border: 1px solid #FFF;
+            margin-bottom: 5px;
+        }
+
+        tr:nth-child(even) {
+            background: #e8eeef;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 20px;
+            font-weight: 300;
+        }
+
+        tfoot tr {
+            background: none;
+        }
+
+        tfoot td {
+            padding: 10px 2px;
+            font-size: 0.8em;
+            font-style: italic;
+            color: #8a97a0;
+        }
+    </style>
+
+</head>
+<body class="body" background="light.jpg">
+
+<div align="center">
+<div  ng-controller="View1Ctrl" style="top: 200px">
+    <div class="menu" id="div_SearchContainer">
+        <h1 align="absolute" style="text-align: center; color: #1ab188">Search your favourite recipe</h1>
+        <input type="text" id="txt" placeholder="Enter the recipe you want to search for" style="margin-left: 100px"/>
+        <button id="btn_getReview" onclick="reci()">Get Recipe</button>
+    </div></div>
+   <!-- <div id="div_VenueList">
+        <h2 style="text-align: center; color: #1ab188"> Recipe Details:</h2>
+        <ul>
+            <li ng-repeat="venue in venueList" style="font-size: x-large; color: #5e5e5e; text-align: center; list-style: none" list-style-position:inside;">
+            <a  href="" ng-click="getReviews(venue)" style="font-size: x-large; color: #5e5e5e; text-align: center;">{{venue.name}}</a>
+            </li>
+        </ul>
+
+    </div>-->
+    <div>
+        <br/><br/><br/>
+    </div>
+</div>
+<div align="center">
+<span id="rec"></span><br/>
+<img style="width: 500px;height: 400px" id="icon" src="/"><br/>
+<!--<span id="rec2"></span> -->
+<b id="recipe">Ingredients:</b><br/>
+    <strong><span id="calorie"></span></strong>
+</div>
+<div align="center">
+<form action="Gsearch.html">
+    <h1>Want to search any other thing</h1><br/><strong>click here</strong>
+    <input  style="width: 100px;height: 50px;background-color: green" type="submit" name="subs"value="Search Anything">
+</form></div>
+
+<!-- In production use:
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+<script src="app.js"></script>
+<script>
+    function reci() {
+        var recipe=new XMLHttpRequest();
+        var c=document.getElementById("txt").value;
+        recipe.open("GET","https://api.edamam.com/search?q="+c+"&app_id=42e47428&app_key=c4dcd279be1a311cc7f745f99ff17f42&from=0&to=3&calories=gte%20591,%20lte%20722&health=alcohol-free",false);
+        recipe.send(null);
+        var r=JSON.parse(recipe.response);
+        document.getElementById("rec").innerHTML="Recipe Name:"+r.hits[0].recipe.label;
+        var i=r.hits[0].recipe.image;
+        document.getElementById("icon").src=i;
+        //document.getElementById("rec2").innerHTML="total intake of energy in kcal:"+r.hits[o].recipe.source;
+        document.getElementById("recipe").innerHTML=r.hits[0].recipe.ingredientLines;
+        document.getElementById("calorie").innerHTML="Calories:"+r.hits[0].recipe.calories;
+    }
+</script>
+
+</body>
+</html>
