@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.usgir.myapplication.MainActivity"
+    tools:deviceIds="wear_round">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:id="@+id/textView"
+        android:layout_below="@+id/editText"
+        android:layout_alignStart="@+id/imageView"
+        android:layout_marginTop="29dp" />
+
+    <Button
+        android:text="Get Recipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button"
+        android:onClick="onClick"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/editText"
+        android:layout_marginTop="12dp" />
+
+    <ImageView
+        android:src="@drawable/accept_deny_dialog_negative_bg"
+        android:layout_height="100dp"
+        android:id="@+id/imageView"
+        android:layout_marginTop="16dp"
+        android:layout_width="200dp"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editText"
+        android:hint="     enter item"
+        android:layout_alignBaseline="@+id/button"
+        android:layout_alignBottom="@+id/button"
+        android:layout_alignEnd="@+id/imageView" />
+</RelativeLayout>
