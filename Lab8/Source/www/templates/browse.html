@@ -1,0 +1,17 @@
+<ion-view view-title="Browse">
+  <ion-content>
+               
+              <div ng-controller="mycontroller1" align="center">
+                  <button type="submit" ng-click="converttoSpeech()" class="button button-block button-positive" >GetNews</button>
+                  
+                  <p  ng-model="NewsTitle">{{NewsTitle}}</p>
+                  <img ng-src={{img}} width="300dp" height="400dp"/>
+                      <p ng-model="News">{{News}}</p>
+                  <button type="submit" ng-click="openbrowser()">Open Full Story</button>
+                  <button type="submit" ng-click="checksentiment()">CheckSentiment</button>
+                  <p ng-model="sentiment">{{sentiment}}</p>
+              </div>
+      
+  </ion-content>
+</ion-view>
+
