@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+
+    <title>Title</title>
+    <style>
+        h3 { color: green;
+            font-family: "Times New Roman";
+            font-style: normal;
+            text-align: center;
+            font-size: 40px;
+        }
+        h5 {
+            color: blue;
+            font-family: "Times New Roman";
+            font-style: italic;
+            text-align: center;
+        }
+        body{
+            background: url("Processes.png ");
+            background-repeat:no-repeat;
+            background-size: cover  ;
+        }
+    </style>
+</head>
+<body ng-app="apper">
+<h1 align="center">ASE </h1>
+<h1 align="center">THIS IS GIRISH</h1>
+<h3> Assignment - 9</h3>
+<div ng-controller="control" style="margin-left: 200px;margin-top: 30px">
+
+<input type="text" style="border-radius:20px;padding: 4px;border: 10px;height: 10px;background-color:whitesmoke " ng-model="input1"/>
+    <Button ng-click="search()" style="background-color:turquoise ;border-radius: 20px;padding: 4px;border: 10px;width: 70px;height: 25px">Search</Button></br>
+    <div id="col" style="display: none">
+    <p ng-model="out">
+
+        <TR><td style="color: blanchedalmond;width: 115px;font-size: larger;text-align: center"><img src="{{out.image}}"></img></td></TR>
+        <table BORDER=4 CELLPADDING=9>
+        <TR><TH style="color:black; background:white" COLSPAN=2>search results</TH></TR>
+        <TR><TD style="color: teal;width: 110px;font-size: larger;background-color: white">sentiment score:</TD><TD style="color: brown;width: 115px;font-size: larger;text-align: center">0.6566</TD></TR>
+            <TR><TD style="color: teal;width: 110px;font-size: larger;background-color: white">sentiment type:</TD><TD style="color: brown;width: 115px;font-size: larger;text-align: center">positive</TD></TR>
+        </table>
+       <h5 style="color: chartreuse">About:{{out.text1}}</h5>
+        </p>
+        </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
