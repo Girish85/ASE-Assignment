@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MongoDB</title>
+    <link rel="stylesheet" href="Styler.css">
+    <script>
+        function onclicked() {
+            var x= new XMLHttpRequest();
+            x.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                   document.getElementById("demo").innerHTML="Finished Insertion";
+                }
+            };
+            x.open("POST","https://api.mlab.com/api/1/databases/ase/collections/Users?apiKey=KWUPwfpI05ca2Vz9By2m4povWDaA--iL",true);
+            x.setRequestHeader("Content-type", "application/json");
+            var Email = document.getElementById("mail").value;
+            var Password = document.getElementById("pwd").value;
+            var Fname = document.getElementById("fname").value;
+            var Lname = document.getElementById("lname").value;
+            var Mobno = document.getElementById("mobno").value;
+            var Date = document.getElementById("dob").value;
+            var line1 = document.getElementById("line1").value;
+            var line2 = document.getElementById("line2").value;
+            var city = document.getElementById("city").value;
+            var state = document.getElementById("state").value;
+            var zip = document.getElementById("zip").value;
+            var y = {"Emailid": Email,
+                     "Password":Password,
+                     "Fname":Fname,
+                     "Lname":Lname,
+                     "Mobno":Mobno,
+                     "Date":Date,
+                     "line1":line1,
+                     "line2":line2,
+                     "city":city,
+                     "state":state,
+                     "zip":zip
+            };
+            x.send(JSON.stringify(y));
+        }
+    </script>
+</head>
+<body>
+<Div>
+    <br/>
+    <h1 id="demo" align="center">Hello,Welcome to Lab10 Assignment on MongoDB</h1><br/>
+    <form action="Home.html" class="div">
+        <fieldset>
+            <legend>Account Details</legend>
+            <input type="email" id="mail" placeholder="Enter your Emailid"><br/>
+            <input type="password" id="pwd" placeholder="Enter your password"><br/>
+        </fieldset>
+        <br/>
+        <fieldset>
+            <legend>Personal Details</legend>
+            <input type="text" id="fname" placeholder="Enter your First Name" ><br/>
+            <input type="text" id="lname" placeholder="Enter your Last Name" ><br/>
+            <input type="number" id="mobno" placeholder="Enter your mobile number"><br/>
+            <input type="date" id="dob" placeholder="Enter your Date of Birth"> <br/>
+        </fieldset><br/>
+        <fieldset>
+            <legend>Address</legend>
+            <input type="text" id="line1" placeholder="Enter Address line 1"><br/>
+            <input type="text" id="line2" placeholder="Enter Address line 2"><br/>
+            <input type="text" id="city" placeholder="Enter city"><br/>
+            <input type="text" id="state" placeholder="Enter State"><br/>
+            <input type="number" id="zip" placeholder="Enter zip code">
+        </fieldset>
+        <input type="button" id="sub" value="Confirm Details" onclick="onclicked()"><br/><br/>
+        <input type="submit" value="Signup">
+    </form>
+</Div>
+</body>
+</html>
